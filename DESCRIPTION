@@ -1,12 +1,12 @@
 Package: ini
 Type: Package
-Title: Read and Write .ini Files
+Title: Read and Write '.ini' Files
 Version: 0.1
 Date: 2016-03-03
 Author: David Valentim Dias
 Maintainer: David Valentim Dias <dvdscripter@gmail.com>
-Description: Parse simple .ini configuration files to an structured list. Users
-  can manipulate this resulting list with lapply functions. This same
+Description: Parse simple '.ini' configuration files to an structured list. Users
+  can manipulate this resulting list with lapply() functions. This same
   structured list can be used to write back to file after modifications.
 License: GPL-3
 LazyData: FALSE
