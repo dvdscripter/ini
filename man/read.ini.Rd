@@ -2,22 +2,44 @@
 % Please edit documentation in R/ini.R
 \name{read.ini}
 \alias{read.ini}
-\title{Read and parse .INI file}
+\title{Read and parse .ini file to list}
 \usage{
 read.ini(filepath, encoding = getOption("encoding"))
 }
 \arguments{
-\item{filepath}{.INI file to parse}
+\item{filepath}{file to parse}
 
 \item{encoding}{Encoding of filepath parameter, will default to system
 encoding if not specifield}
 }
 \value{
-List with length equivalent to number of [sections], each [section]
-will be a named vector
+List with length equivalent to number of [sections], each section is
+a new list
 }
 \description{
-Read and parse .INI file
+Read and parse .ini file to list
+}
+\details{
+Lines starting with '#' or ';' are comments and will not be parsed
+}
+\examples{
+## Create a new temp ini for reading
+iniFile <- tempfile(fileext = '.ini')
+
+sink(iniFile)
+cat("; This line is a comment\\n")
+cat("# This one too!\\n")
+cat("[Hello World]\\n")
+cat("Foo = Bar\\n")
+sink()
+
+## Read ini
+checkini <- read.ini(iniFile)
+
+## Check structure
+checkini
+checkini$`Hello World`$Foo
+
 }
 \seealso{
 \code{\link{write.ini}}

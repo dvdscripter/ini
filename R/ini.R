@@ -1,13 +1,34 @@
-#' Read and parse .INI file
+#' Read and parse .ini file to list
 #'
-#' @param filepath .INI file to parse
+#' @param filepath file to parse
 #' @param encoding Encoding of filepath parameter, will default to system
 #' encoding if not specifield
 #'
+#' @details Lines starting with '#' or ';' are comments and will not be parsed
+#'
 #' @seealso \code{\link{write.ini}}
 #'
-#' @return List with length equivalent to number of [sections], each [section]
-#' will be a named vector
+#' @return List with length equivalent to number of [sections], each section is
+#' a new list
+#'
+#' @examples
+#' ## Create a new temp ini for reading
+#' iniFile <- tempfile(fileext = '.ini')
+#'
+#' sink(iniFile)
+#' cat("; This line is a comment\n")
+#' cat("# This one too!\n")
+#' cat("[Hello World]\n")
+#' cat("Foo = Bar\n")
+#' sink()
+#'
+#' ## Read ini
+#' checkini <- read.ini(iniFile)
+#'
+#' ## Check structure
+#' checkini
+#' checkini$`Hello World`$Foo
+#'
 #' @export
 #'
 read.ini <- function(filepath, encoding = getOption("encoding")) {
@@ -55,26 +76,31 @@ read.ini <- function(filepath, encoding = getOption("encoding")) {
   ini
 }
 
-#' Parse list structure to .INI file
+#' Write list to .ini file
 #'
-#' @param x List with structure to be write at .INI file.
+#' @param x List with structure to be write at .ini file.
 #'
-#' @param filepath .INI file to write
+#' @param filepath file to write
 #' @param encoding Encoding of filepath parameter, will default to system
 #' encoding if not specifield
 #'
 #' @seealso \code{\link{read.ini}}
 #'
 #' @examples
-#' \dontrun{
-#' ## Create a new list holding our INI
-#' newini = list()
-#' newini[[ "Section Name" ]][[ "Key name" ]] = "Key value"
-#' newini[[ "Section Name 2" ]][[ "Key name" ]] = "Key value"
-#' ## Write structure to file
-#' write.ini(newini, "written.ini")
-#' }
+#' ## Create a new temp ini for writing
+#' iniFile <- tempfile(fileext = '.ini')
 #'
+#' ## Create a new list holding our INI
+#' newini <- list()
+#' newini[[ "Hello World" ]] <- list(Foo = 'Bar')
+#'
+#' ## Write structure to file
+#' write.ini(newini, iniFile)
+#'
+#' ## Check file content
+#' \dontrun{
+#' file.show(iniFile)
+#' }
 #'
 #' @export
 #'

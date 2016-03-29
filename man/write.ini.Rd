@@ -2,31 +2,36 @@
 % Please edit documentation in R/ini.R
 \name{write.ini}
 \alias{write.ini}
-\title{Parse list structure to .INI file}
+\title{Write list to .ini file}
 \usage{
 write.ini(x, filepath, encoding = getOption("encoding"))
 }
 \arguments{
-\item{x}{List with structure to be write at .INI file.}
+\item{x}{List with structure to be write at .ini file.}
 
-\item{filepath}{.INI file to write}
+\item{filepath}{file to write}
 
 \item{encoding}{Encoding of filepath parameter, will default to system
 encoding if not specifield}
 }
 \description{
-Parse list structure to .INI file
+Write list to .ini file
 }
 \examples{
-\dontrun{
-## Create a new list holding our INI
-newini = list()
-newini[[ "Section Name" ]][[ "Key name" ]] = "Key value"
-newini[[ "Section Name 2" ]][[ "Key name" ]] = "Key value"
-## Write structure to file
-write.ini(newini, "written.ini")
-}
+## Create a new temp ini for writing
+iniFile <- tempfile(fileext = '.ini')
 
+## Create a new list holding our INI
+newini <- list()
+newini[[ "Hello World" ]] <- list(Foo = 'Bar')
+
+## Write structure to file
+write.ini(newini, iniFile)
+
+## Check file content
+\dontrun{
+file.show(iniFile)
+}
 
 }
 \seealso{
