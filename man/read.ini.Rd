@@ -29,8 +29,8 @@ iniFile <- tempfile(fileext = '.ini')
 sink(iniFile)
 cat("; This line is a comment\\n")
 cat("# This one too!\\n")
-cat("[Hello World]\\n")
-cat("Foo = Bar\\n")
+cat("[    Hello World]\\n")
+cat("Foo = Bar          \\n")
 sink()
 
 ## Read ini

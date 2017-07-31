@@ -18,8 +18,8 @@
 #' sink(iniFile)
 #' cat("; This line is a comment\n")
 #' cat("# This one too!\n")
-#' cat("[Hello World]\n")
-#' cat("Foo = Bar\n")
+#' cat("[    Hello World]\n")
+#' cat("Foo = Bar          \n")
 #' sink()
 #'
 #' ## Read ini
@@ -42,6 +42,9 @@ read.ini <- function(filepath, encoding = getOption("encoding")) {
   ignoreREGEXP <- '^\\s*[;#]'
   # match lines with ; or # at start
 
+  # amazing lack of trim at old versions of R
+  trim <- function(x) sub('^\\s*(.*?)\\s*$', '\\1', x)
+
   ini <- list()
   con <- file(filepath, open = 'r', encoding = encoding)
   on.exit(close(con))
@@ -63,7 +66,7 @@ read.ini <- function(filepath, encoding = getOption("encoding")) {
     }
 
     if ( grepl(keyValueREGEXP, line) ) {
-      tempKeyValue <- trimws(unlist(strsplit(line, "=")))
+      tempKeyValue <- trim(unlist(strsplit(line, "=")))
       key <- tempKeyValue[1]
       value <- tempKeyValue[2]
 
