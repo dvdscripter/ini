@@ -31,6 +31,7 @@ cat("; This line is a comment\\n")
 cat("# This one too!\\n")
 cat("[    Hello World]\\n")
 cat("Foo = Bar          \\n")
+cat("Foo1 = Bar=345 \\n")
 sink()
 
 ## Read ini

@@ -20,6 +20,7 @@
 #' cat("# This one too!\n")
 #' cat("[    Hello World]\n")
 #' cat("Foo = Bar          \n")
+#' cat("Foo1 = Bar=345 \n")
 #' sink()
 #'
 #' ## Read ini
@@ -33,6 +34,18 @@
 #'
 read.ini <- function(filepath, encoding = getOption("encoding")) {
 
+  index <- function(x, rune) {
+    equalPosition = numeric(1)
+    for(pos in 1:nchar(x)) {
+      if (strsplit(x, '')[[1]][pos] == rune) {
+        equalPosition = pos
+        break
+      }
+    }
+    return(equalPosition)
+  }
+  # internal helper function to find where a character occur
+
   sectionREGEXP <- '^\\s*\\[\\s*(.+?)\\s*]'
   # match section and capture section name
 
@@ -42,8 +55,8 @@ read.ini <- function(filepath, encoding = getOption("encoding")) {
   ignoreREGEXP <- '^\\s*[;#]'
   # match lines with ; or # at start
 
-  # amazing lack of trim at old versions of R
   trim <- function(x) sub('^\\s*(.*?)\\s*$', '\\1', x)
+  # amazing lack of trim at old versions of R
 
   ini <- list()
   con <- file(filepath, open = 'r', encoding = encoding)
@@ -66,9 +79,8 @@ read.ini <- function(filepath, encoding = getOption("encoding")) {
     }
 
     if ( grepl(keyValueREGEXP, line) ) {
-      tempKeyValue <- trim(unlist(strsplit(line, "=")))
-      key <- tempKeyValue[1]
-      value <- tempKeyValue[2]
+      key <- trim(paste0(strsplit(line, '')[[1]][1:(index(line, '=') - 1)], collapse = ''))
+      value <- trim(paste0(strsplit(line, '')[[1]][(index(line, '=') + 1):nchar(line)], collapse = ''))
 
       ini[[ lastSection ]] <- c(ini[[ lastSection ]], list(key = value))
       names(ini[[ lastSection ]])[ match('key', names(ini[[ lastSection ]])) ] <- key
