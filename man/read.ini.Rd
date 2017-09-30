@@ -45,4 +45,3 @@ checkini$`Hello World`$Foo
 \seealso{
 \code{\link{write.ini}}
 }
-

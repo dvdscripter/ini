@@ -37,4 +37,3 @@ file.show(iniFile)
 \seealso{
 \code{\link{read.ini}}
 }
-

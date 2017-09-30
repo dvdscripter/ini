@@ -1,7 +1,7 @@
 Package: ini
 Type: Package
 Title: Read and Write '.ini' Files
-Version: 0.3
+Version: 0.3.0
 Date: 2017-09-30
 Author: David Valentim Disa
 Maintainer: David Valentim Dias <dvdscripter@gmail.com>
@@ -12,5 +12,5 @@ License: GPL-3
 URL: https://github.com/dvdscripter/ini
 BugReports: https://github.com/dvdscripter/ini/issues
 LazyData: FALSE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Suggests: testthat
