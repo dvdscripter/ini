@@ -127,7 +127,7 @@ write.ini <- function(x, filepath, encoding = getOption("encoding")) {
   for(section in names(x) ) {
     writeLines( paste0('[', section, ']'), con)
     for (key in x[ section ]) {
-      writeLines( paste0(names(key), ' = ', key), con)
+      writeLines( paste0(names(key), '=', key), con)
     }
     writeLines("", con)
   }

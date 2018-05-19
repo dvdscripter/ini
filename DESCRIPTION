@@ -1,9 +1,9 @@
 Package: ini
 Type: Package
 Title: Read and Write '.ini' Files
-Version: 0.3.0
-Date: 2017-09-30
-Author: David Valentim Disa
+Version: 0.3.1
+Date: 2017-05-19
+Author: David Valentim Dias
 Maintainer: David Valentim Dias <dvdscripter@gmail.com>
 Description: Parse simple '.ini' configuration files to an structured list. Users
   can manipulate this resulting list with lapply() functions. This same
